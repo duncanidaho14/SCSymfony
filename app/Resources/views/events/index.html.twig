@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EventBrote</title>
+</head>
+<body>
+    
+    <h1> {{ pluralize(events|length, 'Event', 'Events') }} </h1> 
+    {#{{ someMarkdown|raw }}#}
+
+    {# <h1> {% set events_count = events|length %} 
+        {% if events_count == 1 %}
+            1 Event
+        {% else %}
+            {{ events_count }} Events
+        {% endif %}
+    </h1> #}
+    {% for event in events %}
+        <article>
+            <header>
+                <h2><a href="{{ path('event_path', {'id': event.id }) }}">{{ event.name }}</a></h2>
+            </header>
+            {{ event.description|markdownify }}
+            <ul>
+                <li><strong>Date:</strong> {{ event.startsAt|date }}</li>
+                <li><strong>Location:</strong> {{ event.location }}</li>
+                <li>
+                    <strong>Price:</strong>
+
+                    {{ format_price(event) }}
+                    
+                    {# {% if event.price == 0 %}
+                        Free
+                    {% else %} 
+                        {{ event.price|localizedcurrency('USD') }}
+                    {% endif %} #}
+                </li>
+                {#<li><strong>Price:</strong> {{ event.price|number_format }}</li>#}
+            </ul>
+        </article>
+    {% endfor %}
+
+
+
+    
+</body>
+</html>

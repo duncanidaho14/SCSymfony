@@ -1,0 +1,9 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+root_path:
+    path: '/'
+    methods: GET
+    defaults:
+        _controller: 'AppBundle:Events:index'

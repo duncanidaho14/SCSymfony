@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EventBrote</title>
+</head>
+<body>
+    <article>
+        <header>
+            <h2>{{ event.name }}</h2>
+        </header>
+        {{ event.description|markdownify }}
+        
+            <h3>Date :</h3> 
+            <p> {{ event.startsAt|date }} </p>
+            <h3>Location :</h3> 
+            <p> {{ event.location }} </p>
+            
+            <h3>Price :</h3>
+
+            <p>{{ format_price(event) }} </p>
+                
+                {# {% if event.price == 0 %}
+                    Free
+                {% else %} 
+                    {{ event.price|localizedcurrency('USD') }}
+                {% endif %} #}
+           
+            {#<li><strong>Price:</strong> {{ event.price|number_format }}</li>#}
+        
+    </article>
+
+    <a href="{{ path('events_path')}}">&larr;All Events</a>
+</body>
+</html>
