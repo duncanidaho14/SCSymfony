@@ -1,5 +1,8 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
+imports:
+    - { resource: 'legacy_aliases.yml'}
+
 parameters:
     #parameter_name: value
 
@@ -7,26 +10,27 @@ services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    
+    # _instanceof:
+    #     Twig_ExtensionInterface:
+    #         tags: ['twig.extension']
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    AppBundle\:
+        resource: '../../src/AppBundle/*'
+        exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
 
     twig.extension.intl:
-        
         class: Twig_Extensions_Extension_Intl
         
-        tags:
-            - { name: twig.extension }
 
-    app.markdown_transformer:
-        class: AppBundle\Service\MarkdownTransformer
+    AppBundle\Service\MarkdownTransformer:
         arguments: ['@markdown.parser', '@doctrine_cache.providers.my_markdown_cache']
 
-    app.markdown.extension:
-        class: AppBundle\Twig\MarkdownExtension
-        arguments: ['@app.markdown_transformer']
-        tags:
-            - { name: twig.extension }
-
-
-    app.twig.extension:
-        class: AppBundle\Twig\AppExtension
-        tags:
-            - { name: twig.extension }
+    
+        
+        

@@ -38,7 +38,7 @@ Class EventsController extends Controller
 
 		
 
-		dump($request);
+		//dump($request);
 
 
 		$em = $this->getDoctrine()->getManager();
