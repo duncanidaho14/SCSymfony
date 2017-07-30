@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Event;
 use AppBundle\Service\MarkdownTransformer;
 use DateTime;
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,7 +19,7 @@ Class EventsController extends Controller
 	 *  @Route("/events", name="events_path")
 	 *  @Method("GET")
 	**/
-	public function indexAction(Request $request)
+	public function indexAction(Request $request, MarkdownTransformer $markdownTransformer, LoggerInterface $logger)
 	{
 		
 		/*dump($this->container->get('logger'));
@@ -40,6 +41,9 @@ Class EventsController extends Controller
 
 		//dump($request);
 
+
+		dump($markdownTransformer->parse('je suis **cool**'));
+		$logger->warning('Juste un test');
 
 		$em = $this->getDoctrine()->getManager();
         
