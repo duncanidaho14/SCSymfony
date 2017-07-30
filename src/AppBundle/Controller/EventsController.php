@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
 use AppBundle\Service\MarkdownTransformer;
+use AppBundle\Service\NameGenerator;
 use DateTime;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -42,8 +43,11 @@ Class EventsController extends Controller
 		//dump($request);
 
 
-		dump($markdownTransformer->parse('je suis **cool**'));
-		$logger->warning('Juste un test');
+		//dump($markdownTransformer->parse('je suis **cool**'));
+		//$logger->warning('Juste un test');
+
+
+		dump($this->get('app.girl_name_generator')->getRandomName());
 
 		$em = $this->getDoctrine()->getManager();
         

@@ -29,10 +29,20 @@ services:
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         
-
     AppBundle\Service\MarkdownTransformer:
         arguments: ['@markdown.parser', '@doctrine_cache.providers.my_markdown_cache']
 
-    
+    app.boy_name_generator:
+        class: AppBundle\Service\NameGenerator
+        public: true
+        arguments:
+            - '@logger'
+            - ['Eric', 'Jean', 'luc', 'jeremy']
         
+    app.girl_name_generator:
+        class: AppBundle\Service\NameGenerator
+        public: true
+        arguments:
+            - '@logger'
+            - ['Maud', 'Lana', 'Marie', 'Alia']
         
